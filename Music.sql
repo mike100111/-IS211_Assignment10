@@ -1,0 +1,18 @@
+Create Table artist (
+id INTEGER PRIMARY KEY NOT NULL,
+name TEXT)
+
+CREATE TABLE album(
+id INTEGER PRIMARY KEY NOT NULL,
+artist_id INTEGER NOT NULL,
+name TEXT NOT NULL,
+FOREIGN KEY (artist_id) REFERENCES artist(id))
+
+CREATE TABLE song(
+id INTEGER PRIMARY KEY NOT NULL,
+album_id INTEGER NOT NULL,
+trackNum INTEGER NOT NULL,
+name TEXT NOT NULL,
+lengthInSeconds INTEGER NOT NULL,
+FOREIGN KEY (album_id) REFERENCES album(id))
+
