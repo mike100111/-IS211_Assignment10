@@ -1,13 +1,16 @@
 import sqlite3 as datacontext
 
+# open database connectopm
 db = datacontext.connect('pet.db')
 cur = db.cursor()
 
+# Create the database schema
 def createDb():
 	cur.execute('CREATE TABLE person (id INTEGER PRIMARY KEY,first_name TEXT,last_name TEXT,age INTEGER)')
 	cur.execute('CREATE TABLE pet (id INTEGER PRIMARY KEY,name TEXT,breed TEXT,age INTEGER,dead INTEGER)')
 	cur.execute('CREATE TABLE person_pet (person_id INTEGER,pet_id INTEGER)')
 	
+# load data into database
 def loadDb():
 	
 	persons = ((1, 'James', 'Smith', 41),
@@ -24,7 +27,8 @@ def loadDb():
 
 	#mapping table to connect people to pets, potentially with many to many relationships
 	person_pets = ((1, 1), (1, 2), (2, 3), (2, 4), (3, 5), (4, 6))
-
+	
+	# insert the arrays
 	db.executemany('INSERT INTO person VALUES (?,?,?,?)',persons)	
 	db.executemany('INSERT INTO pet VALUES (?,?,?,?,?)',pets)	
 	db.executemany('INSERT INTO person_pet VALUES (?,?)',person_pets)
